@@ -2,7 +2,7 @@
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
-    id: 'mapbox/Streets-v11',
+    id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
     accessToken: API_KEY
@@ -17,7 +17,7 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 // Create a base layer that holds both maps.
 let baseMaps = {
   "Streets": streets,
-  "Satellite Streets": satelliteStreets 
+  "Satellite": satelliteStreets 
 };
 
 // Create the map object with a center and zoom level.
@@ -25,9 +25,9 @@ let baseMaps = {
 // let map = L.map('mapid').setView([40.7, -94.5], 4);
 // Create the map object with a center and zoom level.
 let map = L.map("mapid", {
-  center: [43.7, -79.3],
-  zoom: 11,
-  layers: [satelliteStreets]
+  center: [39.5, -98.5],
+  zoom: 3,
+  layers: [streets]
 })
 
 // Pass our map layers into our layers control and add the layers control to the map.
@@ -36,15 +36,13 @@ L.control.layers(baseMaps).addTo(map);
 
 // Accessing the Toronto GeoJSON URL
 
-// Accessing the Toronto neighborhoods GeoJSON URL.
-let torontoHoods = "https://raw.githubusercontent.com/CaptCarmine/Mapping_Earthquakes/main/torontoNeighborhoods.json";
+// Accessing the Earthquake Data GeoJSON URL
+let earthquakeData =  "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-
-// Grabbing our GeoJSON data.
-d3.json(torontoHoods).then(function(data) {
-  console.log(data);
-// Creating a GeoJSON layer with the retrieved data.
-L.geoJson(data).addTo(map);
+// Retrieve the earthquake GeoJSON data.
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data) {
+  // Creating a GeoJSON layer with the retrieved data.
+  L.geoJson(data).addTo(map);
 });
 
 
