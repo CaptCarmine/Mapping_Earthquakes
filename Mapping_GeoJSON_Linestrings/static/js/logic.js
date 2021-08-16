@@ -35,76 +35,18 @@ L.control.layers(baseMaps).addTo(map);
 // We create the dark view tile layer that will be an option for our map.
 
 // Accessing the airport GeoJSON URL
-let airportData = "https://raw.githubusercontent.com/CaptCarmine/Mapping_Earthquakes/main/majorAirports.json";
+let torontoData = "https://raw.githubusercontent.com/CaptCarmine/Mapping_Earthquakes/main/torontoRoutes.json";
 
 
 // Grabbing our GeoJSON data.
-// d3.json(airportData).then(function(data) {
-//   console.log(data);  
-// // Creating a GeoJSON layer with the retrieved data.
-// L.geoJson(data)
-// .addTo(map);
-// });
-
-// Grabbing our GeoJSON data.
-d3.json(airportData).then(function(data) {
-  console.log(data);  
+d3.json(torontoData).then(function(data) {
+  console.log(data);
 // Creating a GeoJSON layer with the retrieved data.
-L.geoJson(data, {
-  // We turn each feature into a marker on the map.
-  onEachFeature: function(feature, layer) {
-    // console.log(layer);
-    layer.bindPopup("<h2>" + "Airport code: " + feature.properties.faa + "</h2> <hr> <h3>" + "Airport Name: " + feature.properties.name + "</h3>");
-  }
-}).addTo(map);
+L.geoJson(data).addTo(map);
 });
 
-// 13.5.2 Data
-// // Add GeoJSON data.
-// let sanFranAirport =
-// {"type":"FeatureCollection","features":[{
-//     "type":"Feature",
-//     "properties":{
-//         "id":"3469",
-//         "name":"San Francisco International Airport",
-//         "city":"San Francisco",
-//         "country":"United States",
-//         "faa":"SFO",
-//         "icao":"KSFO",
-//         "alt":"13",
-//         "tz-offset":"-8",
-//         "dst":"A",
-//         "tz":"America/Los_Angeles"},
-//         "geometry":{
-//             "type":"Point",
-//             "coordinates":[-122.375,37.61899948120117]}}
-// ]};
 
 
-
-// GeoJSON Format
-// L.geoJSON(geojsonFeature).addTo(map);
-// 13.5.2 part 2
-// L.geoJson(sanFranAirport, {
-//   // We turn each feature into a marker on the map.
-//   onEachFeature: function(feature, layer) {
-//     console.log(layer);
-//     layer.bindPopup("<h2>" + "Airport code: " + feature.properties.faa + "</h2> <hr> <h3>" + "Airport Name: " + feature.properties.name + "</h3>");
-//   }
-// }).addTo(map);
-
-
-// Grabbing our GeoJSON data.
-// 13.5.2 part 1 
-// L.geoJson(sanFranAirport, {
-//   // We turn each feature into a marker on the map.
-//   pointToLayer: function(feature, latlng) {
-//     console.log(feature);
-//     return L.marker(latlng)
-//     .bindPopup("<h2>" + feature.properties.name + "</h2> <hr> <h3>" + feature.properties.city + ", " + feature.properties.country + "</h3>");
-//   }
-
-// }).addTo(map);
 
 
 
